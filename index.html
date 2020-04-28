@@ -1,29 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
+﻿<!DOCTYPE html>
+<html lang="ja">
+
 <head>
-<meta name="generator" content="WZ EDITOR 5.0">
-<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-2022-JP">
-<link rev="made" href="mailto:your@email.ne.jp">
-<style>
-<!--
-	h1.title { font: bolder xx-large Arial,sans-serif; }
-//-->
-</style>
-<title>Welcome</title>
+    <meta charset="UTF-8">
+    <title>Test Web...</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+    <script src="/canvas2d.js"></script>
+    <style>
+        html {
+            background-color: rgb(192, 192, 192);
+            margin: 0px;
+        }
+    </style>
 </head>
+
 <body>
-
-<h1 class=title>Welcome</h1>
-
-<p></p>
-
-
-
-
-<hr>
-<address>
-	mailto: your@email.ne.jp<br>
-	Last update: 
-</address>
+    <style type="text/css">
+        canvas {
+            border: 0px solid #000000;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    <div id="bgView">
+        <canvas id="dummy" width="400" height="480" style="background-color:#808080"></canvas>
+        <canvas id="serverView" width="320" height="200"></canvas>
+    </div>
 </body>
+
 </html>
