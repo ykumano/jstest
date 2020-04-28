@@ -1,5 +1,4 @@
 ﻿(() => {
-    var socketio = io();
     var cntr = 0;
 
     var px = 0;
@@ -26,13 +25,6 @@
 
         updateFrame();
     }, false);
-
-    /**
-     * サーバからのデータ受信ハンドラ
-     */
-    socketio.on("sendData", function (msg) {
-        console.log("msg:" + msg);
-    });
 
     function initialize() {
         canvas = util.canvas;
