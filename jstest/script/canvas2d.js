@@ -7,7 +7,7 @@ class Canvas2DUtility {
      * @constructor
      * @param {HTMLCanvasElement} canvas - 対象となる canvas element
      */
-    constructor(canvas) {
+    constructor(canvas, window) {
         /**
          * @type {HTMLCanvasElement}
          */
@@ -16,6 +16,24 @@ class Canvas2DUtility {
          * @type {CanvasRenderingContext2D}
          */
         this.context2d = canvas.getContext('2d');
+
+        var wWidth = window.innerWidth;
+        var wHeight = window.innerHeight;
+        var cWidth = canvas.width;
+        var cHeight = canvas.height;
+
+        var wScale = wWidth / cWidth;
+        var hScale = wHeight / cHeight;
+
+        if (wScale > hScale) {
+            this.canvasScale = hScale;
+        } else {
+            this.canvasScale = wScale;
+        }
+
+        canvas.width = cWidth * this.canvasScale;
+        canvas.height = cHeight * this.canvasScale;
+        this.context2d.scale(this.canvasScale, this.canvasScale);
 
         /**
          * @type {string}
@@ -262,5 +280,43 @@ class Canvas2DUtility {
         this.font = fontName;
         this.context2d.font = this.font;
     }
+
+    initEvent(handler) {
+        var mouseFlag = false;
+        let canvas = this.canvasElement;
+        let scale = this.canvasScale;
+        canvas.addEventListener('mousedown', function (e) {
+            mouseFlag = true;
+            handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+        });
+        canvas.addEventListener('mousemove', function (e) {
+            if (mouseFlag) {
+                handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+            }
+        });
+        canvas.addEventListener('mouseup', function (e) {
+            mouseFlag = false
+        });
+        canvas.addEventListener('touchstart', function (e) {
+            console.log("touchstart");
+            handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+        });
+        canvas.addEventListener('touchmove', function (e) {
+            var touch = e.touches[0];
+            console.log("touchmove" + touch.clientX + "," + touch.clientY);
+            handler((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
+        });
+        canvas.addEventListener('touchend', function (e) {
+            console.log("touchend");
+        });
+
+        /* canvas外に対するタッチイベントを無効化 */
+        var bgView = document.getElementById("bgView");
+        bgView.addEventListener('touchstart', function (e) { e.preventDefault(); });
+        bgView.addEventListener('touchmove', function (e) { e.preventDefault(); });
+        bgView.addEventListener('touchend', function (e) { e.preventDefault(); });
+    }
+
+
 }
 

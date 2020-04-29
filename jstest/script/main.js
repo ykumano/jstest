@@ -3,7 +3,6 @@
 
     var px = 0;
     var py = 0;
-    var mouseFlag = false;
 
     /**
      * ユーティリティクラス
@@ -19,7 +18,7 @@
         console.log("on load");
 
         // ユーティリティクラスを初期化
-        util = new Canvas2DUtility(document.getElementById('serverView'));
+        util = new Canvas2DUtility(document.getElementById('serverView'), window);
 
         initialize();
 
@@ -28,36 +27,8 @@
 
     function initialize() {
         canvas = util.canvas;
-        canvas.addEventListener('mousedown', function (e) {
-            mouseFlag = true;
-            onPress(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-        });
-        canvas.addEventListener('mousemove', function (e) {
-            if (mouseFlag) {
-                onPress(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-            }
-        });
-        canvas.addEventListener('mouseup', function (e) {
-            mouseFlag = false
-        });
-        canvas.addEventListener('touchstart', function (e) {
-            console.log("touchstart");
-            onPress(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-        });
-        canvas.addEventListener('touchmove', function (e) {
-            var touch = e.touches[0];
-            console.log("touchmove" + touch.clientX + "," + touch.clientY);
-            onPress(touch.clientX - canvas.offsetLeft, touch.clientY - canvas.offsetTop);
-        });
-        canvas.addEventListener('touchend', function (e) {
-            console.log("touchend");
-        });
 
-        /* canvas外に対するタッチイベントを無効化 */
-        var bgView = document.getElementById("bgView");
-        bgView.addEventListener('touchstart', function (e) { e.preventDefault(); });
-        bgView.addEventListener('touchmove', function (e) { e.preventDefault(); });
-        bgView.addEventListener('touchend', function (e) { e.preventDefault(); });
+        util.initEvent(onPress);
     }
 
     function onPress(x, y) {
@@ -70,6 +41,7 @@
      */
     function updateFrame() {
         // 画面クリア
+        util.drawRect(0, 0, 320, 400, "#808080ff");
         util.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
