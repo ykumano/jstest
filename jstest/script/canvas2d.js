@@ -281,10 +281,18 @@ class Canvas2DUtility {
         this.context2d.font = this.font;
     }
 
-    initEvent(press, move, release) {
+    /**
+     * イベントリスナの設定
+     * @param {*} press 
+     * @param {*} move 
+     * @param {*} release 
+     */
+    setEventListener(press, move, release) {
         var mouseFlag = false;
         let canvas = this.canvasElement;
         let scale = this.canvasScale;
+
+        /** マウスクリックイベントの登録 */
         canvas.addEventListener('mousedown', function (e) {
             mouseFlag = true;
             press((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
@@ -299,6 +307,7 @@ class Canvas2DUtility {
             release((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
         });
 
+        /** タッチイベントの登録 */
         canvas.addEventListener('touchstart', function (e) {
             var touch = e.changedTouches[0];
             press((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
@@ -307,19 +316,13 @@ class Canvas2DUtility {
             var touch = e.changedTouches[0];
             move((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
+
         canvas.addEventListener('touchend', function (e) {
             var touch = e.changedTouches[0];
-            console.log("touches:" + e.changedTouches.length);
+//            console.log("touches:" + e.changedTouches.length);
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
-
-        /* canvas外に対するタッチイベントを無効化 */
-        var bgView = document.getElementById("bgView");
-        bgView.addEventListener('touchstart', function (e) { e.preventDefault(); });
-        bgView.addEventListener('touchmove', function (e) { e.preventDefault(); });
-        bgView.addEventListener('touchend', function (e) { e.preventDefault(); });
     }
-
 
 }
 

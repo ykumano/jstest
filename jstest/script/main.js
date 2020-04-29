@@ -28,7 +28,7 @@
     function initialize() {
         canvas = util.canvas;
 
-        util.initEvent(onPress, onMove, onRelease);
+        util.setEventListener(onPress, onMove, onRelease);
     }
 
     function onPress(x, y) {
