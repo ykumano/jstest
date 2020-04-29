@@ -298,6 +298,7 @@ class Canvas2DUtility {
             mouseFlag = false
             release((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
         });
+
         canvas.addEventListener('touchstart', function (e) {
             var touch = e.changedTouches[0];
             press((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
@@ -308,6 +309,7 @@ class Canvas2DUtility {
         });
         canvas.addEventListener('touchend', function (e) {
             var touch = e.changedTouches[0];
+            console.log("touches:"e.changedTouches.length)
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
 
