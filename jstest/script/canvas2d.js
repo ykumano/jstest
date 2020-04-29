@@ -299,15 +299,15 @@ class Canvas2DUtility {
             release((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchstart', function (e) {
-            var touch = e.touches[0];
+            var touch = e.changedTouches[0];
             press((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchmove', function (e) {
-            var touch = e.touches[0];
+            var touch = e.changedTouches[0];
             move((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchend', function (e) {
-            var touch = e.touches[0];
+            var touch = e.changedTouches[0];
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
 
