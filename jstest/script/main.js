@@ -9,7 +9,7 @@
      */
     var util = null;
 
-    let canvas = null;
+    //   let canvas = null;
 
     /**
      * Window読込み完了ハンドラ
@@ -17,34 +17,33 @@
     window.addEventListener('load', () => {
         console.log("on load");
 
-        // ユーティリティクラスを初期化
-        util = new Canvas2DUtility(document.getElementById('serverView'), window);
-
         initialize();
 
         updateFrame();
     }, false);
 
     function initialize() {
-        canvas = util.canvas;
+        //       canvas = util.canvas;
+        // ユーティリティクラスを初期化
+        util = new Canvas2DUtility(document.getElementById('serverView'), window);
 
         util.setEventListener(onPress, onMove, onRelease);
     }
 
     function onPress(x, y) {
-        console.log("press:" + x + "," + y);
+        //       console.log("press:" + x + "," + y);
         px = x;
         py = y;
     }
 
     function onMove(x, y) {
-        console.log("move:" + x + "," + y);
+        //       console.log("move:" + x + "," + y);
         px = x;
         py = y;
     }
 
     function onRelease(x, y) {
-        console.log("release:" + x + "," + y);
+        //       console.log("release:" + x + "," + y);
         px = x;
         py = y;
     }
