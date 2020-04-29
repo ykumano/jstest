@@ -309,7 +309,7 @@ class Canvas2DUtility {
         });
         canvas.addEventListener('touchend', function (e) {
             var touch = e.changedTouches[0];
-            console.log("touches:"e.changedTouches.length)
+            console.log("touches:" + e.changedTouches.length);
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
 
