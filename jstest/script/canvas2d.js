@@ -281,33 +281,32 @@ class Canvas2DUtility {
         this.context2d.font = this.font;
     }
 
-    initEvent(handler) {
+    initEvent(press, move, release) {
         var mouseFlag = false;
         let canvas = this.canvasElement;
         let scale = this.canvasScale;
         canvas.addEventListener('mousedown', function (e) {
             mouseFlag = true;
-            handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+            press((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('mousemove', function (e) {
             if (mouseFlag) {
-                handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+                move((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
             }
         });
         canvas.addEventListener('mouseup', function (e) {
             mouseFlag = false
+            release((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchstart', function (e) {
-            console.log("touchstart");
-            handler((e.clientX - canvas.offsetLeft) / scale, (e.clientY - canvas.offsetTop) / scale);
+            press((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchmove', function (e) {
             var touch = e.touches[0];
-            console.log("touchmove" + touch.clientX + "," + touch.clientY);
-            handler((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
+            move((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
         canvas.addEventListener('touchend', function (e) {
-            console.log("touchend");
+            release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
 
         /* canvas外に対するタッチイベントを無効化 */

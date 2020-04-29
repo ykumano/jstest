@@ -28,10 +28,23 @@
     function initialize() {
         canvas = util.canvas;
 
-        util.initEvent(onPress);
+        util.initEvent(onPress, onMove, onRelease);
     }
 
     function onPress(x, y) {
+        console.log("press:" + x + "," + y);
+        px = x;
+        py = y;
+    }
+
+    function onMove(x, y) {
+        console.log("move:" + x + "," + y);
+        px = x;
+        py = y;
+    }
+
+    function onRelease(x, y) {
+        console.log("release:" + x + "," + y);
         px = x;
         py = y;
     }
