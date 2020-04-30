@@ -4,6 +4,11 @@
     var px = 0;
     var py = 0;
 
+    var oprStartX = 0;
+    var oprStartY = 0;
+    var ctrlX = 0;
+    var ctrlY = 0;
+
     /**
      * ユーティリティクラス
      */
@@ -34,12 +39,17 @@
         //       console.log("press:" + x + "," + y);
         px = x;
         py = y;
+        oprStartX = x;
+        oprStartY = y;
     }
 
     function onMove(x, y) {
         //       console.log("move:" + x + "," + y);
         px = x;
         py = y;
+        ctrlX = x - oprStartX;
+        ctrlY = y - oprStartY;
+        console.log("ctrl:" + ctrlX + "," + ctrlY);
     }
 
     function onRelease(x, y) {
@@ -61,11 +71,13 @@
         util.drawText("test " + cntr, 20, 20, "#00000040");
         util.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
 
-
         util.drawLine(0, 0, px, py, "#ff000080", 4);
 
-        requestAnimationFrame(updateFrame);
+        util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
-        //        console.log(px + "," + py);
+        /**
+         * フレーム更新処理再登録
+         */
+        requestAnimationFrame(updateFrame);
     }
 })();
