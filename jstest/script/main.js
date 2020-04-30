@@ -14,7 +14,7 @@
     var posX = 100;
     var posY = 100;
 
-var testImage;
+    var testImage;
 
     /**
      * ユーティリティクラス
@@ -94,20 +94,30 @@ var testImage;
 
         util.drawImage(testImage, 100, 100, 16, 16);
 
-        if(ctrlX > 0){
-            rot += 0.05;
-        } else if(ctrlX < 0){
-            rot -= 0.05;
+        let r = 0;
+        if (ctrlX > 1) {
+            r = ctrlX * 0.01;
+            if (r > 0.1) {
+                r = 0.1;
+            }
+            rot += r;
+        } else if (ctrlX < -1) {
+            r = ctrlX * 0.01;
+            if (r < -0.1) {
+                r = -0.1;
+            }
+            rot += r;
+        } else {
         }
-        if(ctrlY < -10){
+        if (ctrlY < -5) {
             spd = 1;
         } else {
             spd = 0;
         }
-        posX += Math.cos(rot)*spd;
-        posY += Math.sin(rot)*spd;
+        posX += Math.cos(rot) * spd;
+        posY += Math.sin(rot) * spd;
 
-        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
+//        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
 
         /**
          * フレーム更新処理再登録
