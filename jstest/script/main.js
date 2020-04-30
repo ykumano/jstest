@@ -8,7 +8,11 @@
     var oprStartY = 0;
     var ctrlX = 0;
     var ctrlY = 0;
+
     var rot = 0;
+    var spd = 0;
+    var posX = 100;
+    var posY = 100;
 
 var testImage;
 
@@ -68,6 +72,7 @@ var testImage;
         py = y;
         ctrlX = 0;
         ctrlY = 0;
+        spd = 0;
     }
 
     /**
@@ -94,7 +99,15 @@ var testImage;
         } else if(ctrlX < 0){
             rot -= 0.05;
         }
-        util.drawRotatedImage(testImage, 150, 100, 16, 16, rot);
+        if(ctrlY < -10){
+            spd = 1;
+        } else {
+            spd = 0;
+        }
+        posX += Math.cos(rot)*spd;
+        posY += Math.sin(rot)*spd;
+
+        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
 
         /**
          * フレーム更新処理再登録
