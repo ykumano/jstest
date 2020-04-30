@@ -9,6 +9,8 @@
     var ctrlX = 0;
     var ctrlY = 0;
 
+var testImage;
+
     /**
      * ユーティリティクラス
      */
@@ -31,6 +33,13 @@
         //       canvas = util.canvas;
         // ユーティリティクラスを初期化
         util = new Canvas2DUtility(document.getElementById('serverView'), window);
+
+        testImage = new Image();
+        testImage.addEventListener('load', () => {
+            // 画像のロードが完了したら準備完了フラグを立てる
+            console.log("image load.");
+        }, false);
+        testImage.src = "./res/a.png";
 
         util.setEventListener(onPress, onMove, onRelease);
     }
@@ -74,6 +83,8 @@
         util.drawLine(0, 0, px, py, "#ff000080", 4);
 
         util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
+
+        util.drawImage(testImage, 100, 100, 16, 16);
 
         /**
          * フレーム更新処理再登録

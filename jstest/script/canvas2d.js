@@ -319,10 +319,21 @@ class Canvas2DUtility {
 
         canvas.addEventListener('touchend', function (e) {
             var touch = e.changedTouches[0];
-//            console.log("touches:" + e.changedTouches.length);
+            //            console.log("touches:" + e.changedTouches.length);
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
     }
 
+    /**
+     * 
+     * @param {*} image 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} w 
+     * @param {*} h 
+     */
+    drawImage(image, x, y, w, h) {
+        this.context2d.drawImage(image, x, y, w, h);
+    }
 }
 
