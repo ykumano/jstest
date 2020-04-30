@@ -335,5 +335,29 @@ class Canvas2DUtility {
     drawImage(image, x, y, w, h) {
         this.context2d.drawImage(image, x, y, w, h);
     }
+
+    drawRotatedImage(image, x, y, w, h, r) {
+        // 座標系を回転する前の状態を保存する
+        this.context2d.save();
+        // 自身の位置が座標系の中心と重なるように平行移動する
+        this.context2d.translate(x, y);
+        // 座標系を回転させる（270 度の位置を基準にするため Math.PI * 1.5 を引いている）
+        this.context2d.rotate(r - Math.PI * 1.5);
+
+        // キャラクターの幅を考慮してオフセットする量
+        let offsetX = w / 2;
+        let offsetY = h / 2;
+        // キャラクターの幅やオフセットする量を加味して描画する
+        this.context2d.drawImage(
+            image,
+            -offsetX, // 先に translate で平行移動しているのでオフセットのみ行う
+            -offsetY, // 先に translate で平行移動しているのでオフセットのみ行う
+            w,
+            h
+        );
+        // 座標系を回転する前の状態に戻す
+        this.context2d.restore();
+    }
+
 }
 

@@ -85,6 +85,7 @@ var testImage;
         util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
         util.drawImage(testImage, 100, 100, 16, 16);
+        util.drawRotatedImage(testImage, 150, 100, 16, 16, ctrlX * 0.01);
 
         /**
          * フレーム更新処理再登録
