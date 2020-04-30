@@ -8,6 +8,7 @@
     var oprStartY = 0;
     var ctrlX = 0;
     var ctrlY = 0;
+    var rot = 0;
 
 var testImage;
 
@@ -65,6 +66,8 @@ var testImage;
         //       console.log("release:" + x + "," + y);
         px = x;
         py = y;
+        ctrlX = 0;
+        ctrlY = 0;
     }
 
     /**
@@ -85,7 +88,13 @@ var testImage;
         util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
         util.drawImage(testImage, 100, 100, 16, 16);
-        util.drawRotatedImage(testImage, 150, 100, 16, 16, ctrlX * 0.01);
+
+        if(ctrlX > 0){
+            rot += 0.05;
+        } else if(ctrlX < 0){
+            rot -= 0.05;
+        }
+        util.drawRotatedImage(testImage, 150, 100, 16, 16, rot);
 
         /**
          * フレーム更新処理再登録
