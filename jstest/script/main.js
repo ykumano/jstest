@@ -14,12 +14,12 @@
     var posX = 100;
     var posY = 100;
 
-    var testImage;
-
     /**
      * ユーティリティクラス
      */
-    var util = null;
+    var canvas2d = null;
+
+    var own = null;
 
     //   let canvas = null;
 
@@ -37,16 +37,12 @@
     function initialize() {
         //       canvas = util.canvas;
         // ユーティリティクラスを初期化
-        util = new Canvas2DUtility(document.getElementById('serverView'), window);
+        canvas2d = new Canvas2DUtility(document.getElementById('serverView'), window);
 
-        testImage = new Image();
-        testImage.addEventListener('load', () => {
-            // 画像のロードが完了したら準備完了フラグを立てる
-            console.log("image load.");
-        }, false);
-        testImage.src = "./res/a.png";
+        own = new Sprite(canvas2d, "./res/a.png");
+        own.setPosition(150, 150);
 
-        util.setEventListener(onPress, onMove, onRelease);
+        canvas2d.setEventListener(onPress, onMove, onRelease);
     }
 
     function onPress(x, y) {
@@ -80,17 +76,17 @@
      */
     function updateFrame() {
         // 画面クリア
-        util.drawRect(0, 0, 320, 400, "#808080ff");
-        util.drawRect(0, 0, 320, 240, "#f0f0f0ff");
+        canvas2d.drawRect(0, 0, 320, 400, "#808080ff");
+        canvas2d.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
 
-        util.drawText("test " + cntr, 20, 20, "#00000040");
-        util.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
+        canvas2d.drawText("test " + cntr, 20, 20, "#00000040");
+        canvas2d.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
 
-        util.drawLine(0, 0, px, py, "#ff000080", 4);
+//        canvas2d.drawLine(0, 0, px, py, "#ff000080", 4);
 
-        util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
+        canvas2d.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
         //        util.drawImage(testImage, 100, 100, 16, 16);
         let r = 0;
@@ -125,7 +121,11 @@
         posX += Math.cos(rot) * spd;
         posY += Math.sin(rot) * spd;
 
-        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
+        own.setPosition(posX, posY);
+        own.setRotation(rot);
+//        canvas2d.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
+
+        own.drawRotate();
 
         /**
          * フレーム更新処理再登録

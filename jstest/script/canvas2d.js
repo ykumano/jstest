@@ -333,7 +333,16 @@ class Canvas2DUtility {
      * @param {*} h 
      */
     drawImage(image, x, y, w, h) {
-        this.context2d.drawImage(image, x, y, w, h);
+        let offsetX = w / 2;
+        let offsetY = h / 2;
+
+        this.context.drawImage(
+            image,
+            x - offsetX,
+            y - offsetY,
+            w,
+            h
+        )
     }
 
     drawRotatedImage(image, x, y, w, h, r) {
