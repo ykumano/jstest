@@ -58,12 +58,12 @@
     }
 
     function onMove(x, y) {
-        //       console.log("move:" + x + "," + y);
+//        console.log("move:" + x + "," + y);
         px = x;
         py = y;
         ctrlX = x - oprStartX;
         ctrlY = y - oprStartY;
-        console.log("ctrl:" + ctrlX + "," + ctrlY);
+//        console.log("ctrl:" + ctrlX + "," + ctrlY);
     }
 
     function onRelease(x, y) {
@@ -92,19 +92,18 @@
 
         util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
-        util.drawImage(testImage, 100, 100, 16, 16);
-
+//        util.drawImage(testImage, 100, 100, 16, 16);
         let r = 0;
         if (ctrlX > 1) {
-            r = ctrlX * 0.01;
-            if (r > 0.1) {
-                r = 0.1;
+            r = ctrlX * 0.005;
+            if (r > 0.05) {
+                r = 0.05;
             }
             rot += r;
         } else if (ctrlX < -1) {
-            r = ctrlX * 0.01;
-            if (r < -0.1) {
-                r = -0.1;
+            r = ctrlX * 0.005;
+            if (r < -0.05) {
+                r = -0.05;
             }
             rot += r;
         } else {
@@ -114,10 +113,13 @@
         } else {
             spd = 0;
         }
+//        console.log("ctrlY:" + ctrlY + " spd:" + spd + " rot:" + rot);
+
+
         posX += Math.cos(rot) * spd;
         posY += Math.sin(rot) * spd;
 
-//        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
+        util.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
 
         /**
          * フレーム更新処理再登録
