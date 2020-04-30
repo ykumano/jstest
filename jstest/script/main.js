@@ -58,12 +58,12 @@
     }
 
     function onMove(x, y) {
-//        console.log("move:" + x + "," + y);
+        //        console.log("move:" + x + "," + y);
         px = x;
         py = y;
         ctrlX = x - oprStartX;
         ctrlY = y - oprStartY;
-//        console.log("ctrl:" + ctrlX + "," + ctrlY);
+        //        console.log("ctrl:" + ctrlX + "," + ctrlY);
     }
 
     function onRelease(x, y) {
@@ -92,7 +92,7 @@
 
         util.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
-//        util.drawImage(testImage, 100, 100, 16, 16);
+        //        util.drawImage(testImage, 100, 100, 16, 16);
         let r = 0;
         if (ctrlX > 1) {
             r = ctrlX * 0.005;
@@ -108,12 +108,18 @@
             rot += r;
         } else {
         }
-        if (ctrlY < -5) {
-            spd = 1;
-        } else {
-            spd = 0;
+        if (ctrlY < -1) {
+            spd = ctrlY * -0.1;
+            if (spd > 2) {
+                spd = 2;
+            }
+        } else if (ctrlY > 1) {
+            spd = ctrlY * -0.1;
+            if (spd < -2) {
+                spd = -2;
+            }
         }
-//        console.log("ctrlY:" + ctrlY + " spd:" + spd + " rot:" + rot);
+        //        console.log("ctrlY:" + ctrlY + " spd:" + spd + " rot:" + rot);
 
 
         posX += Math.cos(rot) * spd;
