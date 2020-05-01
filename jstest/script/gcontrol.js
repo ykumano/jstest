@@ -1,5 +1,8 @@
 var debugFlag = true;
 
+/**
+ * 2次元座標管理クラス
+ */
 class Pos2D {
     constructor(x, y) {
         this.x = x;
@@ -7,6 +10,9 @@ class Pos2D {
     }
 }
 
+/**
+ * 2次元ベクトル管理クラス
+ */
 class Vec2D {
     constructor(th, v) {
         this.th = th;
@@ -16,8 +22,16 @@ class Vec2D {
 
 class GControl {
 
-    constructor(canvas2d, x, y, w, h) {
-        this.canvas2d = canvas2d;
+    /**
+     * コンストラクタ
+     * @param {*} gcanvas 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} w 
+     * @param {*} h 
+     */
+    constructor(gcanvas, x, y, w, h) {
+        this.gcanvas = gcanvas;
 
         let x_ = 0;
         let y_ = 0;
@@ -63,12 +77,12 @@ class GControl {
         /**
          * 画像読込み完了フラグ
          */
-        this.ready = false;
+        this.imageReady = false;
 
         this.image = new Image();
         this.image.addEventListener('load', () => {
             // 画像のロードが完了したら準備完了フラグを立てる
-            this.ready = true;
+            this.imageReady = true;
             this.width = this.image.naturalWidth;
             this.height = this.image.naturalHeight;
 
@@ -86,12 +100,24 @@ class GControl {
         this.vec.th = th;
     }
 
+    /**
+     * 画像表示
+     */
     draw() {
-        this.canvas2d.drawImage(this.image, this.pos.x, this.pos.y, this.width, this.height);
+        this.gcanvas.drawImage(
+            this.image,
+            this.pos.x,
+            this.pos.y,
+            this.width,
+            this.height
+        );
     }
 
+    /**
+     * 回転画像表示
+     */
     drawRotate() {
-        this.canvas2d.drawRotatedImage(
+        this.gcanvas.drawRotatedImage(
             this.image,
             this.pos.x,
             this.pos.y,
