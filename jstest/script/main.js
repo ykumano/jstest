@@ -39,7 +39,8 @@
         // ユーティリティクラスを初期化
         canvas2d = new Canvas2DUtility(document.getElementById('serverView'), window);
 
-        own = new Sprite(canvas2d, "./res/a.png");
+        own = new Control(canvas2d);
+        own.setImage("./res/a.png");
         own.setPosition(150, 150);
 
         canvas2d.setEventListener(onPress, onMove, onRelease);
@@ -84,7 +85,7 @@
         canvas2d.drawText("test " + cntr, 20, 20, "#00000040");
         canvas2d.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
 
-//        canvas2d.drawLine(0, 0, px, py, "#ff000080", 4);
+        //        canvas2d.drawLine(0, 0, px, py, "#ff000080", 4);
 
         canvas2d.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
@@ -123,7 +124,7 @@
 
         own.setPosition(posX, posY);
         own.setRotation(rot);
-//        canvas2d.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
+        //        canvas2d.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
 
         own.drawRotate();
 

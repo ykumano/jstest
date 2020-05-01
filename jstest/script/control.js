@@ -12,10 +12,16 @@ class Vec2D {
     }
 }
 
-class Sprite {
-    constructor(canvas2d, imagePath) {
+class Control {
+
+    constructor(canvas2d) {
         this.canvas2d = canvas2d;
 
+        this.pos = new Pos2D(0, 0);
+        this.vec = new Vec2D(0, 0);
+    }
+
+    setImage(imagePath){
         this.imagePath = imagePath;
 
         /**
@@ -33,9 +39,6 @@ class Sprite {
             console.log("image:" + this.width + "," + this.height);
         }, false);
         this.image.src = imagePath;
-
-        this.pos = new Pos2D(0, 0);
-        this.vec = new Vec2D(0, 0);
     }
 
     setPosition(x, y) {
