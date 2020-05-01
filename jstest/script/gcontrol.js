@@ -12,7 +12,7 @@ class Vec2D {
     }
 }
 
-class Control {
+class GControl {
 
     constructor(canvas2d) {
         this.canvas2d = canvas2d;

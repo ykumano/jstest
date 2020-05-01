@@ -2,7 +2,7 @@
 /**
  * Canvas2D API をラップしたユーティリティクラス
  */
-class Canvas2DUtility {
+class GCanvas {
     /**
      * @constructor
      * @param {HTMLCanvasElement} canvas - 対象となる canvas element
