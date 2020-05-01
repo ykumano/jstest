@@ -1,3 +1,5 @@
+var debugFlag = true;
+
 class Pos2D {
     constructor(x, y) {
         this.x = x;
@@ -14,14 +16,48 @@ class Vec2D {
 
 class GControl {
 
-    constructor(canvas2d) {
+    constructor(canvas2d, x, y, w, h) {
         this.canvas2d = canvas2d;
 
-        this.pos = new Pos2D(0, 0);
+        let x_ = 0;
+        let y_ = 0;
+
+        if (x !== undefined) {
+            x_ = x;
+        }
+        if (y !== undefined) {
+            y_ = y;
+        }
+
+        if (w !== undefined) {
+            this.width = w;
+        } else {
+            this.width = 0;
+        }
+
+        if (h !== undefined) {
+            this.height = h;
+        } else {
+            this.height = 0;
+        }
+
+        this.pos = new Pos2D(x_, y_);
         this.vec = new Vec2D(0, 0);
+
+        this.debugLog();
     }
 
-    setImage(imagePath){
+    debugLog(msg) {
+        if (debugFlag == true) {
+            let dbgLog = "";
+            if (msg !== undefined) {
+                dbgLog = "[" + msg + "] ";
+            }
+            console.log(dbgLog + "pos:(" + this.pos.x + "," + this.pos.y + ") size:(" + this.width + "," + this.height + ")");
+        }
+    }
+
+    setImage(imagePath) {
         this.imagePath = imagePath;
 
         /**
@@ -36,7 +72,7 @@ class GControl {
             this.width = this.image.naturalWidth;
             this.height = this.image.naturalHeight;
 
-            console.log("image:" + this.width + "," + this.height);
+            this.debugLog("Image.onload");
         }, false);
         this.image.src = imagePath;
     }
