@@ -1,5 +1,13 @@
 class Own extends GControl {
 
+    /**
+     * コンストラクタ
+     * @param {*} gcanvas 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} w 
+     * @param {*} h 
+     */
     constructor(gcanvas, x, y, w, h) {
         super(gcanvas, x, y, w, h);
 

@@ -4,6 +4,11 @@ var debugFlag = true;
  * 2次元座標管理クラス
  */
 class Pos2D {
+    /**
+     * コンストラクタ
+     * @param {*} x 
+     * @param {*} y 
+     */
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -14,12 +19,20 @@ class Pos2D {
  * 2次元ベクトル管理クラス
  */
 class Vec2D {
+    /**
+     * コンストラクタ
+     * @param {*} th 
+     * @param {*} v 
+     */
     constructor(th, v) {
         this.th = th;
         this.v = v;
     }
 }
 
+/**
+ * コントロール管理クラス
+ */
 class GControl {
 
     /**
@@ -61,6 +74,10 @@ class GControl {
         this.debugLog();
     }
 
+    /**
+     * デバッグ用ログ
+     * @param {*} msg 
+     */
     debugLog(msg) {
         if (debugFlag == true) {
             let dbgLog = "";
@@ -71,6 +88,10 @@ class GControl {
         }
     }
 
+    /**
+     * 画像設定
+     * @param {*} imagePath 
+     */
     setImage(imagePath) {
         this.imagePath = imagePath;
 
@@ -115,7 +136,7 @@ class GControl {
     }
 
     /**
-     * 画像病害
+     * 画像描画
      */
     drawImage() {
         this.gcanvas.drawImage(
