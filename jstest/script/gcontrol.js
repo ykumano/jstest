@@ -131,7 +131,7 @@ class GControl {
     /**
      * 描画処理
      */
-    draw() {
+    render() {
 
     }
 

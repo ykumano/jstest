@@ -38,6 +38,9 @@ class Own extends GControl {
         this.spd = 0;
     }
 
+    /**
+     * 更新処理
+     */
     update() {
         let r = 0;
         if (this.ctrlX > 1) {
@@ -53,13 +56,14 @@ class Own extends GControl {
             }
             this.rot += r;
         }
+
         if (this.ctrlY < -1) {
-            this.spd = ctrlY * -0.1;
+            this.spd = this.ctrlY * -0.1;
             if (this.spd > 2) {
                 this.spd = 2;
             }
         } else if (this.ctrlY > 1) {
-            this.spd = ctrlY * -0.1;
+            this.spd = this.ctrlY * -0.1;
             if (this.spd < -2) {
                 this.spd = -2;
             }
@@ -72,7 +76,7 @@ class Own extends GControl {
         this.setRotation(this.rot);
     }
 
-    draw() {
+    render() {
         this.drawRotatedImage();
     }
 }

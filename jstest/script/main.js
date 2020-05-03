@@ -4,7 +4,7 @@
     var px = 0;
     var py = 0;
 
-    var objList = null;
+    var objList = [];
 
     /**
      * ユーティリティクラス
@@ -68,15 +68,23 @@
         gcanvas.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
-
         gcanvas.drawText("test " + cntr, 20, 20, "#00000040");
+
         gcanvas.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
+        //        gcanvas.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
-        gcanvas.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
-
+        /**
+         * オブジェクト更新処理
+         */
         objList.forEach(function (value) {
             value.update();
-            value.draw();
+        })
+
+        /**
+         * オブジェクト描画処理
+         */
+        objList.forEach(function (value) {
+            value.render();
         })
 
         /**
