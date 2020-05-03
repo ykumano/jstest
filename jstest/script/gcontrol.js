@@ -101,9 +101,23 @@ class GControl {
     }
 
     /**
-     * 画像表示
+     * 更新処理
+     */
+    update() {
+
+    }
+
+    /**
+     * 描画処理
      */
     draw() {
+
+    }
+
+    /**
+     * 画像病害
+     */
+    drawImage() {
         this.gcanvas.drawImage(
             this.image,
             this.pos.x,
@@ -114,9 +128,9 @@ class GControl {
     }
 
     /**
-     * 回転画像表示
+     * 回転画像描画
      */
-    drawRotate() {
+    drawRotatedImage() {
         this.gcanvas.drawRotatedImage(
             this.image,
             this.pos.x,

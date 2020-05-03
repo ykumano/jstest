@@ -4,15 +4,7 @@
     var px = 0;
     var py = 0;
 
-    var oprStartX = 0;
-    var oprStartY = 0;
-    var ctrlX = 0;
-    var ctrlY = 0;
-
-    var rot = 0;
-    var spd = 0;
-    var posX = 100;
-    var posY = 100;
+    var objList = null;
 
     /**
      * ユーティリティクラス
@@ -34,42 +26,37 @@
         updateFrame();
     }, false);
 
+    /**
+     * 初期化処理
+     */
     function initialize() {
-        //       canvas = util.canvas;
         // ユーティリティクラスを初期化
         gcanvas = new GCanvas(document.getElementById('serverView'), window);
 
-        own = new GControl(gcanvas);
+        own = new Own(gcanvas, 100, 100);
         own.setImage("./res/a.png");
-        own.setPosition(150, 150);
+
+        objList.push(own);
 
         gcanvas.setEventListener(onPress, onMove, onRelease);
     }
 
     function onPress(x, y) {
-        //       console.log("press:" + x + "," + y);
         px = x;
         py = y;
-        oprStartX = x;
-        oprStartY = y;
+        own.onPress(x, y);
     }
 
     function onMove(x, y) {
-        //        console.log("move:" + x + "," + y);
         px = x;
         py = y;
-        ctrlX = x - oprStartX;
-        ctrlY = y - oprStartY;
-        //        console.log("ctrl:" + ctrlX + "," + ctrlY);
+        own.onMove(x, y);
     }
 
     function onRelease(x, y) {
-        //       console.log("release:" + x + "," + y);
         px = x;
         py = y;
-        ctrlX = 0;
-        ctrlY = 0;
-        spd = 0;
+        own.onRelease(x, y);
     }
 
     /**
@@ -85,48 +72,12 @@
         gcanvas.drawText("test " + cntr, 20, 20, "#00000040");
         gcanvas.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
 
-        //        canvas2d.drawLine(0, 0, px, py, "#ff000080", 4);
-
         gcanvas.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
-        //        util.drawImage(testImage, 100, 100, 16, 16);
-        let r = 0;
-        if (ctrlX > 1) {
-            r = ctrlX * 0.005;
-            if (r > 0.05) {
-                r = 0.05;
-            }
-            rot += r;
-        } else if (ctrlX < -1) {
-            r = ctrlX * 0.005;
-            if (r < -0.05) {
-                r = -0.05;
-            }
-            rot += r;
-        } else {
-        }
-        if (ctrlY < -1) {
-            spd = ctrlY * -0.1;
-            if (spd > 2) {
-                spd = 2;
-            }
-        } else if (ctrlY > 1) {
-            spd = ctrlY * -0.1;
-            if (spd < -2) {
-                spd = -2;
-            }
-        }
-        //        console.log("ctrlY:" + ctrlY + " spd:" + spd + " rot:" + rot);
-
-
-        posX += Math.cos(rot) * spd;
-        posY += Math.sin(rot) * spd;
-
-        own.setPosition(posX, posY);
-        own.setRotation(rot);
-        //        canvas2d.drawRotatedImage(testImage, posX, posY, 16, 16, rot);
-
-        own.drawRotate();
+        objList.forEach(function (value) {
+            value.update();
+            value.draw();
+        })
 
         /**
          * フレーム更新処理再登録
