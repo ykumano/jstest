@@ -22,9 +22,11 @@ class GCanvas {
         var cWidth = canvas.width;
         var cHeight = canvas.height;
 
+        /**
+         * Canvasの拡大率を算出
+         */
         var wScale = wWidth / cWidth;
         var hScale = wHeight / cHeight;
-
         if (wScale > hScale) {
             this.canvasScale = hScale;
         } else {
@@ -316,16 +318,14 @@ class GCanvas {
             var touch = e.changedTouches[0];
             move((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
-
         canvas.addEventListener('touchend', function (e) {
             var touch = e.changedTouches[0];
-            //            console.log("touches:" + e.changedTouches.length);
             release((touch.clientX - canvas.offsetLeft) / scale, (touch.clientY - canvas.offsetTop) / scale);
         });
     }
 
     /**
-     * 
+     * 画像描画
      * @param {*} image 
      * @param {*} x 
      * @param {*} y 
@@ -345,6 +345,15 @@ class GCanvas {
         )
     }
 
+    /**
+     * 回転画像描画
+     * @param {*} image 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} w 
+     * @param {*} h 
+     * @param {*} r 
+     */
     drawRotatedImage(image, x, y, w, h, r) {
         // 座標系を回転する前の状態を保存する
         this.context2d.save();

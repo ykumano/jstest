@@ -13,8 +13,6 @@
 
     var own = null;
 
-    //   let canvas = null;
-
     /**
      * Window読込み完了ハンドラ
      */
@@ -31,7 +29,7 @@
      */
     function initialize() {
         // ユーティリティクラスを初期化
-        gcanvas = new GCanvas(document.getElementById('serverView'), window);
+        gcanvas = new GCanvas(document.getElementById('mainCanvas'), window);
 
         own = new Own(gcanvas, 100, 100);
         own.setImage("./res/a.png");
