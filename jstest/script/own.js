@@ -55,27 +55,27 @@ class Own extends GControl {
      * 更新処理
      */
     update() {
-        let r = 0;
+        let rotDiff = 0;
         let rd = 0;
-        let tr = 0.2;
+        const turnRate = 0.2;
 
         this.tgtRot = Math.atan2(this.moveY, this.moveX);
         if (this.tgtRot < 0) {
             this.tgtRot += Math.PI * 2;
         }
         console.log("r:" + this.rot + " tgt:" + this.tgtRot);
-        r = this.rot - this.tgtRot;
-        if (r < 0) {
-            if (r < -Math.PI) {
-                rd = tr;
+        rotDiff = this.rot - this.tgtRot;
+        if (rotDiff < 0) {
+            if (rotDiff < -Math.PI) {
+                rd = turnRate;
             } else {
-                rd = -tr;
+                rd = -turnRate;
             }
         } else {
-            if (r > Math.PI) {
-                rd = -tr;
+            if (rotDiff > Math.PI) {
+                rd = -turnRate;
             } else {
-                rd = tr;
+                rd = turnRate;
             }
         }
         this.rot += rd;
