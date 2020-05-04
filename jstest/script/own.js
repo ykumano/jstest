@@ -18,23 +18,25 @@ class Own extends GControl {
 
         this.oprStartX = 0;
         this.oprStartY = 0;
-        this.ctrlX = 0;
-        this.ctrlY = 0;
+        this.moveX = 0;
+        this.moveY = 0;
+        this.tgtRot = 0;
     }
 
     onPress(x, y) {
         this.oprStartX = x;
         this.oprStartY = y;
+        this.spd = 0.5;
     }
 
     onMove(x, y) {
-        this.ctrlX = x - this.oprStartX;
-        this.ctrlY = y - this.oprStartY;
+        this.moveX = x - this.oprStartX;
+        this.moveY = y - this.oprStartY;
     }
 
     onRelease(x, y) {
-        this.ctrlX = 0;
-        this.ctrlY = 0;
+        this.moveX = 0;
+        this.moveY = 0;
         this.spd = 0;
     }
 
@@ -43,31 +45,17 @@ class Own extends GControl {
      */
     update() {
         let r = 0;
-        if (this.ctrlX > 1) {
-            r = this.ctrlX * 0.005;
-            if (r > 0.05) {
-                r = 0.05;
-            }
-            this.rot += r;
-        } else if (this.ctrlX < -1) {
-            r = this.ctrlX * 0.005;
-            if (r < -0.05) {
-                r = -0.05;
-            }
-            this.rot += r;
-        }
 
-        if (this.ctrlY < -1) {
-            this.spd = this.ctrlY * -0.1;
-            if (this.spd > 2) {
-                this.spd = 2;
-            }
-        } else if (this.ctrlY > 1) {
-            this.spd = this.ctrlY * -0.1;
-            if (this.spd < -2) {
-                this.spd = -2;
-            }
-        }
+        this.tgtRot = Math.atan2(this.moveY, this.moveX);
+        /*
+                r = this.tgtRot - this.rot;
+                if (rot > this.tgtRot) {
+                    this.rot -= 0.1;
+                } else {
+                    this.rot += 0.1;
+                }
+        */
+        this.rot = Math.PI / 2;
 
         this.posX += Math.cos(this.rot) * this.spd;
         this.posY += Math.sin(this.rot) * this.spd;

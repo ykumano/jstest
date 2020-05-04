@@ -112,11 +112,20 @@ class GControl {
         this.image.src = imagePath;
     }
 
+    /**
+     * 位置設定処理
+     * @param {*} x 
+     * @param {*} y 
+     */
     setPosition(x, y) {
         this.pos.x = x;
         this.pos.y = y;
     }
 
+    /**
+     * 方位設定処理
+     * @param {*} th 
+     */
     setRotation(th) {
         this.vec.th = th;
     }
@@ -125,14 +134,12 @@ class GControl {
      * 更新処理
      */
     update() {
-
     }
 
     /**
      * 描画処理
      */
     render() {
-
     }
 
     /**

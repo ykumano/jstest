@@ -1,16 +1,12 @@
 ﻿(() => {
     var cntr = 0;
 
-    var px = 0;
-    var py = 0;
-
     var objList = [];
 
     /**
      * ユーティリティクラス
      */
     var gcanvas = null;
-
     var own = null;
 
     /**
@@ -45,8 +41,6 @@
      * @param {*} y 
      */
     function onPress(x, y) {
-        px = x;
-        py = y;
         own.onPress(x, y);
     }
     /**
@@ -55,8 +49,6 @@
      * @param {*} y 
      */
     function onMove(x, y) {
-        px = x;
-        py = y;
         own.onMove(x, y);
     }
     /**
@@ -65,8 +57,6 @@
      * @param {*} y 
      */
     function onRelease(x, y) {
-        px = x;
-        py = y;
         own.onRelease(x, y);
     }
 
