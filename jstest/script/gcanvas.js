@@ -294,7 +294,7 @@ class GCanvas {
      * @param {*} release 
      */
     setEventListener(press, move, release) {
-        var mouseFlag = false;
+        let mouseFlag = false;
         let canvas = this.canvasElement;
         let scale = this.canvasScale;
 

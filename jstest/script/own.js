@@ -26,17 +26,17 @@ class Own extends GControl {
     onPress(x, y) {
         this.oprStartX = x;
         this.oprStartY = y;
-        this.spd = 0.5;
+        this.spd = 1;
     }
 
     onMove(x, y) {
-        this.moveX = x - this.oprStartX;
-        this.moveY = y - this.oprStartY;
+        this.moveX = this.oprStartX - x;
+        this.moveY = this.oprStartY - y;
     }
 
     onRelease(x, y) {
-        this.moveX = 0;
-        this.moveY = 0;
+//        this.moveX = 0;
+//        this.moveY = 0;
         this.spd = 0;
     }
 
@@ -45,17 +45,29 @@ class Own extends GControl {
      */
     update() {
         let r = 0;
+        let rd = 0;
+        let tr = 0.2;
 
         this.tgtRot = Math.atan2(this.moveY, this.moveX);
-        /*
-                r = this.tgtRot - this.rot;
-                if (rot > this.tgtRot) {
-                    this.rot -= 0.1;
-                } else {
-                    this.rot += 0.1;
-                }
-        */
-        this.rot = Math.PI / 2;
+        if (this.tgtRot < 0) {
+            this.tgtRot += Math.PI * 2;
+        }
+        console.log("r:" + this.rot + " tgt:" + this.tgtRot);
+        r = this.rot - this.tgtRot;
+        if (r < 0) {
+            if (r < -Math.PI) {
+                rd = tr;
+            } else {
+                rd = -tr;
+            }
+        } else {
+            if (r > Math.PI) {
+                rd = -tr;
+            } else {
+                rd = tr;
+            }
+        }
+        this.rot += rd;
 
         this.posX += Math.cos(this.rot) * this.spd;
         this.posY += Math.sin(this.rot) * this.spd;

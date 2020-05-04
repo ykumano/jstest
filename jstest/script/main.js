@@ -65,27 +65,26 @@
      */
     function updateFrame() {
         // 画面クリア
-        gcanvas.drawRect(0, 0, 320, 400, "#808080ff");
+        gcanvas.drawRect(0, 0, 320, 440, "#808080ff");
         gcanvas.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
         gcanvas.drawText("test " + cntr, 20, 20, "#00000040");
 
         gcanvas.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
-        //        gcanvas.drawRect(160, 120, ctrlX, ctrlY, "#00008080");
 
         /**
          * オブジェクト更新処理
          */
-        objList.forEach(function (value) {
-            value.update();
+        objList.forEach(function (obj) {
+            obj.update();
         })
 
         /**
          * オブジェクト描画処理
          */
-        objList.forEach(function (value) {
-            value.render();
+        objList.forEach(function (obj) {
+            obj.render();
         })
 
         /**
