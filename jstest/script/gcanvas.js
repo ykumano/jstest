@@ -376,6 +376,4 @@ class GCanvas {
         // 座標系を回転する前の状態に戻す
         this.context2d.restore();
     }
-
 }
-

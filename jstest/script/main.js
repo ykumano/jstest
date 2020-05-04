@@ -39,18 +39,31 @@
         gcanvas.setEventListener(onPress, onMove, onRelease);
     }
 
+    /**
+     * マウスプレス操作
+     * @param {*} x 
+     * @param {*} y 
+     */
     function onPress(x, y) {
         px = x;
         py = y;
         own.onPress(x, y);
     }
-
+    /**
+     * マウス移動操作
+     * @param {*} x 
+     * @param {*} y 
+     */
     function onMove(x, y) {
         px = x;
         py = y;
         own.onMove(x, y);
     }
-
+    /**
+     * マウスリリース操作
+     * @param {*} x 
+     * @param {*} y 
+     */
     function onRelease(x, y) {
         px = x;
         py = y;
