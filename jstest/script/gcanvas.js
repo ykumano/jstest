@@ -48,12 +48,16 @@ class GCanvas {
     /**
      * @return {HTMLCanvasElement}
      */
-    get canvas() { return this.canvasElement; }
+    get canvas() {
+        return this.canvasElement;
+    }
 
     /**
      * @return {CanvasRenderingContext2D}
      */
-    get context() { return this.context2d; }
+    get context() {
+        return this.context2d;
+    }
 
     /**
      * 矩形を描画する
