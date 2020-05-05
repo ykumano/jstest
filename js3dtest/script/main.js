@@ -1,4 +1,4 @@
-﻿var scene = new scene = new THREE.Scene();
+﻿var scene = new THREE.Scene();
 
 // パーサーを作ります
 var parser = new vox.Parser();
