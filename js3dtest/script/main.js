@@ -1,4 +1,6 @@
-﻿// パーサーを作ります
+﻿var scene = new scene = new THREE.Scene();
+
+// パーサーを作ります
 var parser = new vox.Parser();
 
 // *.voxファイルを読み込みます
