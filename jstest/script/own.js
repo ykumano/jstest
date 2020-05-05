@@ -57,28 +57,33 @@ class Own extends GControl {
     update() {
         let rotDiff = 0;
         let rd = 0;
-        const turnRate = 0.2;
+        const turnRate = 0.3;
 
         this.tgtRot = Math.atan2(this.moveY, this.moveX);
-        if (this.tgtRot < 0) {
-            this.tgtRot += Math.PI * 2;
-        }
-        console.log("r:" + this.rot + " tgt:" + this.tgtRot);
+//        if (this.tgtRot < 0) {
+//            this.tgtRot += Math.PI * 2;
+//        }
         rotDiff = this.rot - this.tgtRot;
-        if (rotDiff < 0) {
-            if (rotDiff < -Math.PI) {
-                rd = turnRate;
-            } else {
-                rd = -turnRate;
-            }
+        console.log("r:" + this.rot + " tgt:" + this.tgtRot + " diff:" + rotDiff);
+
+        if (Math.abs(rotDiff) <= 0.3) {
+            this.rot = this.tgtRot;
         } else {
-            if (rotDiff > Math.PI) {
-                rd = -turnRate;
+            if (rotDiff < 0) {
+                if (rotDiff < -Math.PI) {
+                    rd = turnRate;
+                } else {
+                    rd = -turnRate;
+                }
             } else {
-                rd = turnRate;
+                if (rotDiff > Math.PI) {
+                    rd = -turnRate;
+                } else {
+                    rd = turnRate;
+                }
             }
+            this.rot += rd;
         }
-        this.rot += rd;
 
         this.posX += Math.cos(this.rot) * this.spd;
         this.posY += Math.sin(this.rot) * this.spd;
