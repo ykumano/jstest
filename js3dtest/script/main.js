@@ -11,9 +11,9 @@
   var camera = new THREE.PerspectiveCamera(70, 1, 0.1, 1000);
   var cameraTarget = new THREE.Vector3(0, 10, 0);
   updateListeners.push(function (frame) {
-    camera.position.x = Math.cos(frame * 0.008) * 50;
+    camera.position.x = Math.cos(frame * 0.04) * 50;
     camera.position.y = 15;
-    camera.position.z = Math.sin(frame * 0.008) * 50;
+    camera.position.z = Math.sin(frame * 0.04) * 50;
     camera.lookAt(cameraTarget);
   });
 
