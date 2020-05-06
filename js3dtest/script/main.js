@@ -16,7 +16,7 @@
 
     updateListeners.push(function (frame) {
         if (solMesh !== null) {
-           solMesh.rotation.z = frame * 0.05;
+//           solMesh.rotation.z = frame * 0.02;
         }
     });
 
@@ -56,12 +56,13 @@
     var renderer = new THREE.WebGLRenderer({
         canvas: document.getElementById("c")
     });
-    renderer.setSize(512, 512);
+    renderer.setSize(1024, 1024);
     renderer.setClearColor(0x000000);
 
     var parser = new vox.Parser();
     var parseTasks = [
         "res/SolValou.vox",
+//        "res/Rynex.vox",
     ].map(function (path) {
         return parser.parse(path);
     });
