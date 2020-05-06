@@ -61,8 +61,8 @@
 
     var parser = new vox.Parser();
     var parseTasks = [
-        "res/SolValou.vox",
-//        "res/Rynex.vox",
+//        "res/SolValou.vox",
+        "res/Rynex.vox",
     ].map(function (path) {
         return parser.parse(path);
     });
