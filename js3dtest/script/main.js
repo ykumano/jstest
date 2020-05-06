@@ -89,7 +89,7 @@
                 //     mesh.position.add(fv);
                 // });
 
-                solMesh.rotation.z = Math.PI / 3;
+//                solMesh.rotation.z = Math.PI / 3;
 
                 scene.add(solMesh);
             });
