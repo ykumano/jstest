@@ -16,21 +16,26 @@
 
     updateListeners.push(function (frame) {
         if (solMesh !== null) {
-//           solMesh.rotation.z = frame * 0.02;
+            solMesh.rotation.y = frame * 0.04;
         }
     });
 
     /** カメラの生成 */
     var camera = new THREE.PerspectiveCamera(70, 1, 0.1, 1000);
-    var cameraTarget = new THREE.Vector3(0, 10, 0);
+    var cameraTarget = new THREE.Vector3(0, 30, 0);
+    camera.position.x = -5;
+    camera.position.y = 10;
+    camera.position.z = 30;
     updateListeners.push(function (frame) {
         /**
          * カメラ位置更新処理
          */
-        camera.position.x = Math.cos(-frame * 0.04) * 50;
+/*
+         camera.position.x = Math.cos(-frame * 0.04) * 50;
         camera.position.y = 15;
         camera.position.z = Math.sin(-frame * 0.04) * 50;
         camera.lookAt(cameraTarget);
+*/
     });
 
     /**　光源の生成 */
