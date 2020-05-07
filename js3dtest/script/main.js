@@ -1,6 +1,7 @@
 ﻿window.onload = function () {
     var updateListeners = [];
-    var solMesh = null;
+    var meshList = [];
+    var readNum = 0;
 
     /**
      * 描画更新処理
@@ -15,8 +16,15 @@
     var scene = new THREE.Scene();
 
     updateListeners.push(function (frame) {
-        if (solMesh !== null) {
-            solMesh.rotation.y = frame * 0.04;
+        if(readNum == 2){
+            for(i=0; i<2; i++){
+                m = meshList[i];
+                if(i==0){
+                    m.rotation.y = frame * 0.04;
+                }else {
+                    m.rotation.x = frame * 0.04;
+                }
+            }
         }
     });
 
@@ -25,7 +33,7 @@
     var cameraTarget = new THREE.Vector3(0, 30, 0);
     camera.position.x = -5;
     camera.position.y = 10;
-    camera.position.z = 30;
+    camera.position.z = 50;
     updateListeners.push(function (frame) {
         /**
          * カメラ位置更新処理
@@ -66,7 +74,7 @@
 
     var parser = new vox.Parser();
     var parseTasks = [
-//        "res/SolValou.vox",
+        "res/SolValou.vox",
         "res/Rynex.vox",
     ].map(function (path) {
         return parser.parse(path);
@@ -81,7 +89,7 @@
                     vertexColor: false,
                     optimizeFaces: true,
                 });
-                solMesh = builder.createMesh();
+                var mesh = builder.createMesh();
 
                 // solMesh.position.x = Math.random() * 100 - 50;
                 // solMesh.position.z = Math.random() * 100 - 50;
@@ -96,8 +104,9 @@
                 // });
 
 //                solMesh.rotation.z = Math.PI / 3;
-
-                scene.add(solMesh);
+                meshList.push(mesh);
+                scene.add(mesh);
+                readNum++;
             });
         });
 
