@@ -3,6 +3,10 @@
     var meshList = [];
     var readNum = 0;
 
+    var canvasElement = null;
+    var posX = 0;
+    var posY = 0;
+
     /**
      * 描画更新処理
      * @param {*} frame 
@@ -16,12 +20,13 @@
     var scene = new THREE.Scene();
 
     updateListeners.push(function (frame) {
-        if(readNum == 2){
-            for(i=0; i<2; i++){
+        if (readNum == 2) {
+            for (i = 0; i < 2; i++) {
                 m = meshList[i];
-                if(i==0){
-                    m.rotation.y = frame * 0.04;
-                }else {
+                if (i == 0) {
+                    m.position.x = posX/50-10;
+                    m.position.y = posY/50-30;
+                } else {
                     m.rotation.x = frame * 0.04;
                 }
             }
@@ -31,19 +36,19 @@
     /** カメラの生成 */
     var camera = new THREE.PerspectiveCamera(70, 1, 0.1, 1000);
     var cameraTarget = new THREE.Vector3(0, 30, 0);
-    camera.position.x = -5;
-    camera.position.y = 10;
+    camera.position.x = 0;
+    camera.position.y = 0;
     camera.position.z = 50;
     updateListeners.push(function (frame) {
         /**
          * カメラ位置更新処理
          */
-/*
-         camera.position.x = Math.cos(-frame * 0.04) * 50;
-        camera.position.y = 15;
-        camera.position.z = Math.sin(-frame * 0.04) * 50;
-        camera.lookAt(cameraTarget);
-*/
+        /*
+                 camera.position.x = Math.cos(-frame * 0.04) * 50;
+                camera.position.y = 15;
+                camera.position.z = Math.sin(-frame * 0.04) * 50;
+                camera.lookAt(cameraTarget);
+        */
     });
 
     /**　光源の生成 */
@@ -66,8 +71,10 @@
     // ground.rotation.x = Math.PI * -0.5;
     // scene.add(ground);
 
+    canvasElement = document.getElementById("c");
+
     var renderer = new THREE.WebGLRenderer({
-        canvas: document.getElementById("c")
+        canvas: canvasElement
     });
     renderer.setSize(1024, 1024);
     renderer.setClearColor(0x000000);
@@ -103,12 +110,61 @@
                 //     mesh.position.add(fv);
                 // });
 
-//                solMesh.rotation.z = Math.PI / 3;
+                //                solMesh.rotation.z = Math.PI / 3;
                 meshList.push(mesh);
                 scene.add(mesh);
                 readNum++;
             });
         });
+
+
+    function press(x, y) {
+        console.log("press :" + x + "," + y);
+    }
+    function move(x, y) {
+        console.log("move :" + x + "," + y);
+        posX = x;
+        posY = y;
+    }
+    function release(x, y) {
+        console.log("release :" + x + "," + y);
+
+    }
+
+    {
+        let mouseFlag = false;
+        let scale = 1.0;
+
+        /** マウスクリックイベントの登録 */
+        canvasElement.addEventListener('mousedown', function (e) {
+            mouseFlag = true;
+            press((e.clientX - canvasElement.offsetLeft) / scale, (e.clientY - canvasElement.offsetTop) / scale);
+        });
+        canvasElement.addEventListener('mousemove', function (e) {
+            if (mouseFlag) {
+                move((e.clientX - canvasElement.offsetLeft) / scale, (e.clientY - canvasElement.offsetTop) / scale);
+            }
+        });
+        canvasElement.addEventListener('mouseup', function (e) {
+            mouseFlag = false
+            release((e.clientX - canvasElement.offsetLeft) / scale, (e.clientY - canvasElement.offsetTop) / scale);
+        });
+
+        /** タッチイベントの登録 */
+        canvasElement.addEventListener('touchstart', function (e) {
+            var touch = e.changedTouches[0];
+            press((touch.clientX - canvasElement.offsetLeft) / scale, (touch.clientY - canvasElement.offsetTop) / scale);
+        });
+        canvasElement.addEventListener('touchmove', function (e) {
+            var touch = e.changedTouches[0];
+            move((touch.clientX - canvasElement.offsetLeft) / scale, (touch.clientY - canvasElement.offsetTop) / scale);
+        });
+        canvasElement.addEventListener('touchend', function (e) {
+            var touch = e.changedTouches[0];
+            release((touch.clientX - canvasElement.offsetLeft) / scale, (touch.clientY - canvasElement.offsetTop) / scale);
+        });
+    }
+
 
     var frame = 0;
     var render = function () {
