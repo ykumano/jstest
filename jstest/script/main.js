@@ -69,9 +69,9 @@
         gcanvas.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
-        gcanvas.drawText("test " + cntr, 20, 20, "#000000ff");
+        gcanvas.drawText("test " + cntr, 20, 20, "#00000020");
 
-        gcanvas.drawFan(10, 10, 80, 0.0, Math.PI / 2, "#00000040");
+        gcanvas.drawFan(10, 10, 50, 0.0, Math.PI / 2, "#00000040");
 
         /**
          * オブジェクト更新処理
