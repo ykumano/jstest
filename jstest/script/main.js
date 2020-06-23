@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
     var cntr = 0;
 
     var objList = [];
@@ -69,7 +69,7 @@
         gcanvas.drawRect(0, 0, 320, 240, "#f0f0f0ff");
 
         cntr++;
-        gcanvas.drawText("test " + cntr, 20, 20, "#00000040");
+        gcanvas.drawText("test " + cntr, 20, 20, "#000000ff");
 
         gcanvas.drawFan(10, 10, 40, 0.0, Math.PI / 2, "#00000040");
 
