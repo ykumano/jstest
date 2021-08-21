@@ -3,6 +3,11 @@
 
     var objList = [];
 
+    var memCanvas = document.createElement('canvas');
+    memCanvas.width = 160;
+    memCanvas.height = 100;
+    var memCtx = memCanvas.getContext("2d");
+
     /**
      * ユーティリティクラス
      */
@@ -17,22 +22,36 @@
 
         initialize();
 
-        updateFrame();
+//        updateFrame();
     }, false);
 
     /**
      * 初期化処理
      */
     function initialize() {
-        // ユーティリティクラスを初期化
-        gcanvas = new GCanvas(document.getElementById('mainCanvas'), window);
+        var canvas = document.getElementById('mainCanvas');
+        var context = canvas.getContext("2d");
 
-        own = new Own(gcanvas, 100, 100);
-        own.setImage("./res/a.png");
+        memCtx.fillStyle = 'rgb(160, 160, 255)';
+        memCtx.fillRect(10, 20, 40, 30);
 
-        objList.push(own);
+        var memImage = memCtx.getImageData(0, 0, 160,100);
 
-        gcanvas.setEventListener(onPress, onMove, onRelease);
+        for(var y=0; y<100; y++){
+            for(var x=0; x<160; x++){
+                var rPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 0];
+                var gPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 1];
+                var bPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 2];
+                var aPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 3];
+                //context.fillStyle = `rgb(${255}, ${255}, ${255})`;
+                context.fillStyle = `rgb(${rPix}, ${gPix}, ${bPix})`;
+                //            context.fillStyle = 'rgb(255,255,255)';
+                context.fillRect(x * 3, y*3, 1, 1);
+            }
+
+        }
+
+//        context.putImageData(memImage, 0, 0);
     }
 
     /**
