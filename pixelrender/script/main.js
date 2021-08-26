@@ -46,7 +46,7 @@
                 //context.fillStyle = `rgb(${255}, ${255}, ${255})`;
                 context.fillStyle = `rgb(${rPix}, ${gPix}, ${bPix})`;
                 //            context.fillStyle = 'rgb(255,255,255)';
-                context.fillRect(x * 3, y*3, 1, 1);
+                context.fillRect(x * 8, y*8, 6, 6);
             }
 
         }
