@@ -1,11 +1,14 @@
 (() => {
+    const SCR_W = 160;
+    const SCR_H = 100;
+
     var cntr = 0;
 
     var objList = [];
 
     var memCanvas = document.createElement('canvas');
-    memCanvas.width = 160;
-    memCanvas.height = 100;
+    memCanvas.width = SCR_W;
+    memCanvas.height = SCR_H;
     var memCtx = memCanvas.getContext("2d");
 
     /**
@@ -32,13 +35,13 @@
         var canvas = document.getElementById('mainCanvas');
         var context = canvas.getContext("2d");
 
-        memCtx.fillStyle = 'rgb(160, 160, 255)';
+        memCtx.fillStyle = 'rgb(255, 255, 255)';
         memCtx.fillRect(10, 20, 40, 30);
 
         var memImage = memCtx.getImageData(0, 0, 160,100);
 
-        for(var y=0; y<100; y++){
-            for(var x=0; x<160; x++){
+        for(var y=0; y<SCR_H; y++){
+            for(var x=0; x<SCR_W; x++){
                 var rPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 0];
                 var gPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 1];
                 var bPix = memImage.data[((y*(memImage.width*4)) + (x*4)) + 2];
@@ -46,7 +49,7 @@
                 //context.fillStyle = `rgb(${255}, ${255}, ${255})`;
                 context.fillStyle = `rgb(${rPix}, ${gPix}, ${bPix})`;
                 //            context.fillStyle = 'rgb(255,255,255)';
-                context.fillRect(x * 8, y*8, 6, 6);
+                context.fillRect(x * 4, y*4, 3, 3);
             }
 
         }
